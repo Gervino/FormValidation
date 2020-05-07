@@ -1,0 +1,87 @@
+﻿@page "/"
+@using BlazorFormValidation.Data
+
+<h1>Form Validation - Form Validation in Blazor</h1>
+
+<h1>Employee Entry</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <EditForm Model="@employee" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInValidSubmit">
+            <div class="alert @StatusClass">@StatusMessage</div>
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="name" class="control-label">Name:</label>
+                <InputText id="name" @bind-Value="employee.Name" class="form-control"></InputText>
+                <ValidationMessage For="@(() => employee.Name)" />
+            </div>
+
+            <div class="form-group">
+                <label for="address" class="control-label">Address:</label>
+                <InputText id="address" @bind-Value="employee.Address" class="form-control"></InputText>
+                <ValidationMessage For="@(() => employee.Address)" />
+            </div>
+
+            <div class="form-group">
+                <label for="city" class="control-label">City:</label>
+                <InputText id="city" @bind-Value="employee.City" class="form-control"></InputText>
+                <ValidationMessage For="@(() => employee.City)" />
+            </div>
+
+            <div class="form-group">
+                <label for="state" class="control-label">State:</label>
+                <InputText id="state" @bind-Value="employee.State" class="form-control"></InputText>
+                <ValidationMessage For="@(() => employee.State)" />
+            </div>
+
+            <div class="form-group">
+                <label for="postalCode" class="control-label">PostalCode:</label>
+                <InputText id="postalCode" @bind-Value="employee.PostalCode" class="form-control"></InputText>
+                <ValidationMessage For="@(() => employee.PostalCode)" />
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="control-label">Email:</label>
+                <InputText id="email" @bind-Value="employee.Email" class="form-control"></InputText>
+                <ValidationMessage For="@(() => employee.Email)" />
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="control-label">Phone:</label>
+                <InputText id="phone" @bind-Value="employee.Phone" class="form-control"></InputText>
+                <ValidationMessage For="@(() => employee.Phone)" />
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label for="salary" class="control-label">Salary:</label>
+                <InputNumber id="salary" @bind-Value="employee.Salary" class="form-control"></InputNumber>
+                <ValidationMessage For="@(() => employee.Salary)" />
+            </div>
+
+            <button type="submit" class="btn btn-success"> Submit</button>
+        </EditForm>
+    </div> 
+</div>
+
+@code{
+    private string StatusMessage;
+    private string StatusClass;
+    private Employee employee = new Employee();
+
+    protected void HandleValidSubmit()
+    {
+        StatusClass = "alert-info";
+        StatusMessage = DateTime.Now + " Handle valid submit";
+    }
+
+    protected void HandleInValidSubmit()
+    {
+        StatusClass = "alert-danger";
+        StatusMessage = DateTime.Now + " Handle Invalid submit";
+    }
+}
